@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mujuni BK Arts — Original Handpainted Artworks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2c1810;
+      --accent: #d4a574;
+      --gold: #f4e4c1;
+      --bg: #faf8f5;
+      --dark: #1a1410;
+      --text: #4a4038;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Smooth scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(26, 20, 16, 0.97);
+      border-bottom-color: rgba(212, 165, 116, 0.3);
+    }
+
+    nav.scrolled .logo-text,
+    nav.scrolled .nav-links a,
+    nav.scrolled .nav-tel {
+      color: var(--gold) !important;
+    }
+
+    nav.scrolled .logo-sub {
+      color: var(--accent) !important;
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+      text-decoration: none;
+    }
+
+    .logo-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      transition: color 0.3s;
+    }
+
+    .logo-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-tel {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .nav-tel:hover { color: var(--accent); }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero splatter paint background */
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .paint-drip {
+      position: absolute;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: drip 6s ease-in-out infinite;
+      opacity: 0.18;
+    }
+
+    @keyframes drip {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(20px) scale(1.05); }
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.3);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(26, 20, 16, 0.75) 0%,
+        rgba(44, 24, 16, 0.5) 40%,
+        rgba(212, 165, 116, 0.1) 100%
+      );
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .hero-title .script {
+      font-family: 'Dancing Script', cursive;
+      color: var(--accent);
+      font-weight: 700;
+      display: block;
+      font-size: 0.65em;
+      line-height: 1.2;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: rgba(244, 228, 193, 0.8);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--dark);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 8px 30px rgba(212, 165, 116, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: white;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(212, 165, 116, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* PRICING BANNER */
+    .pricing-banner {
+      background: var(--primary);
+      padding: 1.2rem 0;
+      overflow: hidden;
+    }
+
+    .ticker-wrap {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 20s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2rem;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .ticker-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SECTION COMMONS */
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--text);
+      font-weight: 300;
+      font-size: 1.05rem;
+      max-width: 560px;
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
+      background: var(--bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-images {
+      position: relative;
+      height: 520px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 75%;
+      height: 85%;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 55%;
+      height: 55%;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 6px solid var(--bg);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .artist-badge {
+      position: absolute;
+      bottom: 60px;
+      right: -1rem;
+      background: var(--primary);
+      color: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .artist-badge .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .artist-badge .label {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.25rem;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(212, 165, 116, 0.25);
+    }
+
+    .stat-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-item .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.3rem;
+    }
+
+    /* GALLERY SECTION */
+    .gallery-section {
+      background: var(--dark);
+      padding: 7rem 2rem;
+    }
+
+    .gallery-section .section-label { color: var(--accent); }
+    .gallery-section .section-title { color: white; }
+    .gallery-section .section-sub { color: rgba(244, 228, 193, 0.6); }
+
+    .gallery-filters {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid rgba(212, 165, 116, 0.3);
+      background: transparent;
+      color: rgba(244, 228, 193, 0.7);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .artwork-card {
+      background: #1a1410;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .artwork-card:hover {
+      transform: translateY(-8px) scale(1.02) !important;
+    }
+
+    .artwork-card.wide {
+      grid-column: span 2;
+    }
+
+    .artwork-card.tall {
+      grid-row: span 2;
+    }
+
+    .card-image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artwork-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      display: block;
+    }
+
+    .artwork-card.tall img {
+      height: 510px;
+    }
+
+    .artwork-card.wide img {
+      height: 280px;
+    }
+
+    .artwork-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(26, 20, 16, 0.95) 0%,
+        rgba(26, 20, 16, 0.4) 50%,
+        rgba(26, 20, 16, 0) 100%
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      transition: all 0.4s ease;
+    }
+
+    .card-category {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s ease 0.05s;
+    }
+
+    .artwork-card:hover .card-category {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+      transform: translateY(10px);
+      transition: transform 0.4s ease 0.1s;
+    }
+
+    .artwork-card:hover .card-title {
+      transform: translateY(0);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease 0.15s;
+    }
+
+    .artwork-card:hover .card-footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .card-size {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .card-buy-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .card-buy-btn:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+
+    .sold-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      z-index: 10;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--dark);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      z-index: 10;
+    }
+
+    /* PRICING SECTION */
+    .pricing-section {
+      background: var(--bg);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      transition: all 0.4s ease;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+    }
+
+    .pricing-card.featured {
+      background: var(--primary);
+    }
+
+    .pricing-card.featured .price-title,
+    .pricing-card.featured .price-amount,
+    .pricing-card.featured .price-desc,
+    .pricing-card.featured .feature-item {
+      color: white;
+    }
+
+    .pricing-card.featured .feature-item i { color: var(--accent); }
+    .pricing-card.featured .price-label { color: var(--accent); }
+
+    .pricing-top {
+      padding: 3rem 3rem 2rem;
+    }
+
+    .price-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .price-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .price-amount .currency {
+      font-size: 1.2rem;
+      vertical-align: super;
+      font-weight: 400;
+    }
+
+    .price-desc {
+      font-size: 0.85rem;
+      color: var(--text);
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+
+    .pricing-features {
+      padding: 2rem 3rem 3rem;
+      border-top: 1px solid rgba(212, 165, 116, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .pricing-card.featured .pricing-features {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .feature-item i {
+      color: var(--accent);
+      font-size: 0.9rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .pricing-cta {
+      padding: 0 3rem 3rem;
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--accent);
+      color: var(--dark);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-section {
+      background: #f0ebe4;
+      text-align: center;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 4px;
+      text-align: left;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: var(--accent);
+      opacity: 0.15;
+      position: absolute;
+      top: -0.5rem;
+      left: 1.5rem;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+
+    .author-location {
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-top: 0.1rem;
+    }
+
+    .stars {
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--primary);
+      color: white;
+      padding: 8rem 2rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .contact-section .section-label { color: var(--accent); }
+    .contact-section .section-title { color: white; }
+    .contact-section .section-sub { color: rgba(255,255,255,0.6); }
+
+    .contact-infos {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(212, 165, 116, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(212, 165, 116, 0.25);
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-value {
+      color: white;
+      font-size: 1rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-value:hover { color: var(--accent); }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .social-link {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+
+    /* CONTACT FORM */
+    .contact-form {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(212, 165, 116, 0.2);
+      border-radius: 8px;
+      padding: 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(212, 165, 116, 0.2);
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus { border-color: var(--accent); }
+
+    .form-select option { background: var(--primary); color: white; }
+
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-close:hover { background: var(--accent); color: var(--dark); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav:hover { background: var(--accent); color: var(--dark); }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    .lightbox-info {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
+    }
+
+    .lightbox-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .lightbox-price { color: var(--accent); font-size: 1rem; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 5rem 2rem 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+    }
+
+    .footer-logo .logo-text { color: var(--gold); font-size: 2rem; }
+    .footer-logo .logo-sub { color: var(--accent); }
+
+    .footer-desc {
+      color: rgba(244, 228, 193, 0.5);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-top: 1.25rem;
+      max-width: 300px;
+    }
+
+    .footer-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: rgba(244, 228, 193, 0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(244, 228, 193, 0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* FLOATING WHATSAPP */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 900;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+      transition: all 0.3s;
+      animation: waBounce 3s ease-in-out infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.15);
+      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+    }
+
+    @keyframes waBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* MOBILE NAV */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: var(--dark);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--accent); }
+
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .artwork-card.wide { grid-column: span 2; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-tel { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-images { height: 380px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .artwork-card.wide { grid-column: span 2; }
+      .artwork-card.tall { grid-row: span 1; }
+      .artwork-card.tall img { height: 240px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-title { font-size: clamp(2.5rem, 10vw, 4.5rem); }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .artwork-card.wide { grid-column: span 1; }
+    }
+
+    /* FADE-IN UTILITY */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- FLOATING WHATSAPP -->
+  <a class="whatsapp-float" href="https://wa.me/256750501408" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+    <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+    <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+    <a href="#about" onclick="closeMobileNav()">About</a>
+    <a href="#contact" onclick="closeMobileNav()">Order Now</a>
+    <a href="tel:+256750501408" style="color: var(--accent); font-size:1.1rem; margin-top:1rem;">
+      <i class="fas fa-phone"></i> 0750 501 408
+    </a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="#" class="logo-wrap">
+        <span class="logo-text">Mujuni BK Arts</span>
+        <span class="logo-sub">Original Handpainted Artworks · Uganda</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About the Artist</a></li>
+        <li><a href="#contact">Order / Inquire</a></li>
+      </ul>
+      <a href="tel:+256750501408" class="nav-tel">
+        <i class="fas fa-phone-alt"></i> 0750 501 408
+      </a>
+      <div class="hamburger" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-canvas">
+      <div class="paint-drip" style="width:400px;height:500px;background:#d4a574;top:-100px;left:-80px;border-radius:60% 40% 60% 40%/60% 50% 50% 40%;animation-delay:0s;"></div>
+      <div class="paint-drip" style="width:300px;height:350px;background:#8b4513;bottom:-80px;right:-60px;border-radius:40% 60% 40% 60%;animation-delay:1.5s;"></div>
+      <div class="paint-drip" style="width:200px;height:250px;background:#f4e4c1;top:30%;right:10%;opacity:0.08;animation-delay:3s;"></div>
+    </div>
+
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide active"><img src="./images/IMG-20260731-WA0029.jpg" alt="Art 1"></div>
+      <div class="hero-slide"><img src="./images/IMG-20260731-WA0020.jpg" alt="Art 2"></div>
+      <div class="hero-slide"><img src="./images/IMG-20260731-WA0016.jpg" alt="Art 3"></div>
+      <div class="hero-slide"><img src="./images/IMG-20260731-WA0019.jpg" alt="Art 4"></div>
+      <div class="hero-slide"><img src="./images/IMG-20260731-WA0018.jpg" alt="Art 5"></div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="hero-eyebrow" id="heroEyebrow">Original Handpainted Artworks · Kampala, Uganda</div>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="script">Mujuni BK Arts</span>
+        Every stroke<br>tells a story.
+      </h1>
+      <p class="hero-tagline" id="heroTagline">
+        Handcrafted paintings — each one unique, painted with love and raw artistic passion.<br>
+        Framed and ready to transform your space.
+      </p>
+      <div class="hero-cta" id="heroCta">
+        <a href="#gallery" class="btn-primary">
+          <i class="fas fa-images"></i> View the Gallery
+        </a>
+        <a href="#pricing" class="btn-outline">
+          <i class="fas fa-tag"></i> See Prices
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- PRICING TICKER BANNER -->
+  <div class="pricing-banner">
+    <div class="ticker-wrap" id="ticker">
+      <div class="ticker-item"><span class="ticker-dot"></span> A3 Framed Painting — UGX 250,000</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> A2 Framed Painting — UGX 350,000</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> All works handpainted by Mujuni BK</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> Call / WhatsApp: 0750 501 408</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> Follow us: @mujunibkarts</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> A3 Framed Painting — UGX 250,000</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> A2 Framed Painting — UGX 350,000</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> All works handpainted by Mujuni BK</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> Call / WhatsApp: 0750 501 408</div>
+      <div class="ticker-item"><span class="ticker-dot"></span> Follow us: @mujunibkarts</div>
+    </div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images reveal">
+          <img class="about-img-main" src="./images/IMG-20260731-WA0024.jpg" alt="Artist at work">
+          <img class="about-img-accent" src="./images/IMG-20260731-WA0022.jpg" alt="Painting detail">
+          <div class="artist-badge">
+            <div class="num">16+</div>
+            <div class="label">Original<br>Artworks</div>
+          </div>
+        </div>
+        <div class="about-content reveal">
+          <div class="section-label">The Artist</div>
+          <h2 class="section-title">Painted by hand.<br>Crafted with soul.</h2>
+          <p class="section-sub" style="margin-bottom:1.5rem;">
+            Mujuni BK is a self-driven Ugandan artist whose passion for colour and form breathes life onto every canvas. Each painting is a one-of-a-kind original — no prints, no replicas.
+          </p>
+          <p class="section-sub">
+            From vibrant landscapes to bold portraits, every piece is professionally framed and ready to hang. We ship across Uganda and are available for custom commissions.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="num">100%</div>
+              <div class="label">Original Works</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">All</div>
+              <div class="label">Framed & Ready</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">Custom</div>
+              <div class="label">Commissions Open</div>
+            </div>
+          </div>
+          <div style="margin-top:2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="#contact" class="btn-primary">
+              <i class="fas fa-palette"></i> Commission a Piece
+            </a>
+            <a href="tel:+256750501408" class="btn-outline" style="color:var(--primary); border-color: rgba(44,24,16,0.3);">
+              <i class="fas fa-phone-alt"></i> Call Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-label reveal">Our Gallery</div>
+      <h2 class="section-title reveal">Artworks for Sale</h2>
+      <p class="section-sub reveal" style="margin-bottom:3rem;">
+        Each painting is unique, handcrafted, and framed. Click any piece to view it in full detail.
+      </p>
+
+      <div class="gallery-filters reveal">
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All Works</button>
+        <button class="filter-btn" onclick="filterGallery('a3', this)">A3 — UGX 250,000</button>
+        <button class="filter-btn" onclick="filterGallery('a2', this)">A2 — UGX 350,000</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <div class="artwork-card wide" data-size="a2" data-index="0" onclick="openLightbox(0)">
+          <div class="card-image-wrap">
+            <span class="new-badge">New</span>
+            <img src="./images/IMG-20260731-WA0029.jpg" alt="Painting 1" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 1</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 1')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card tall" data-size="a2" data-index="1" onclick="openLightbox(1)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0020.jpg" alt="Painting 2" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 2</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 2')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="2" onclick="openLightbox(2)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0016.jpg" alt="Painting 3" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Mixed Media · A3</div>
+              <h3 class="card-title">Masterpiece No. 3</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 3')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="3" onclick="openLightbox(3)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0019.jpg" alt="Painting 4" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Acrylic · A3</div>
+              <h3 class="card-title">Masterpiece No. 4</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 4')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a2" data-index="4" onclick="openLightbox(4)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0018.jpg" alt="Painting 5" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 5</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 5')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="5" onclick="openLightbox(5)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0021.jpg" alt="Painting 6" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Mixed Media · A3</div>
+              <h3 class="card-title">Masterpiece No. 6</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 6')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a2" data-index="6" onclick="openLightbox(6)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0014.jpg" alt="Painting 7" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 7</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 7')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="7" onclick="openLightbox(7)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0010.jpg" alt="Painting 8" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Acrylic · A3</div>
+              <h3 class="card-title">Masterpiece No. 8</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 8')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECOND GALLERY ROW -->
+  <section style="background: var(--dark); padding: 0 2rem 7rem;">
+    <div class="container">
+      <div class="gallery-grid">
+
+        <div class="artwork-card wide" data-size="a2" data-index="8" onclick="openLightbox(8)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0009.jpg" alt="Painting 9" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 9</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 9')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="9" onclick="openLightbox(9)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0006.jpg" alt="Painting 10" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Mixed Media · A3</div>
+              <h3 class="card-title">Masterpiece No. 10</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 10')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a2" data-index="10" onclick="openLightbox(10)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0005.jpg" alt="Painting 11" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 11</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 11')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="11" onclick="openLightbox(11)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0002.jpg" alt="Painting 12" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Acrylic · A3</div>
+              <h3 class="card-title">Masterpiece No. 12</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 12')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a2" data-index="12" onclick="openLightbox(12)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0028.jpg" alt="Painting 13" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 13</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 13')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="13" onclick="openLightbox(13)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0024.jpg" alt="Painting 14" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Mixed Media · A3</div>
+              <h3 class="card-title">Masterpiece No. 14</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 14')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a2" data-index="14" onclick="openLightbox(14)">
+          <div class="card-image-wrap">
+            <img src="./images/IMG-20260731-WA0022.jpg" alt="Painting 15" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Oil on Canvas · A2</div>
+              <h3 class="card-title">Masterpiece No. 15</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 350,000</div>
+                  <div class="card-size">A2 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 15')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="artwork-card" data-size="a3" data-index="15" onclick="openLightbox(15)">
+          <div class="card-image-wrap">
+            <span class="new-badge">New</span>
+            <img src="./images/IMG-20260731-WA0014(1).jpg" alt="Painting 16" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-category">Acrylic · A3</div>
+              <h3 class="card-title">Masterpiece No. 16</h3>
+              <div class="card-footer">
+                <div>
+                  <div class="card-price">UGX 250,000</div>
+                  <div class="card-size">A3 Size · Framed</div>
+                </div>
+                <button class="card-buy-btn" onclick="event.stopPropagation(); orderPiece('Masterpiece No. 16')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-label reveal">Transparent Pricing</div>
+      <h2 class="section-title reveal">Simple. Affordable. Framed.</h2>
+      <p class="section-sub reveal">Every painting comes professionally framed and ready to hang on your wall. No hidden fees.</p>
+
+      <div class="pricing-grid">
+        <!-- A3 -->
+        <div class="pricing-card reveal">
+          <div class="pricing-top">
+            <div class="price-label">Standard Size</div>
+            <div class="price-title">A3 Painting</div>
+            <div class="price-amount"><span class="currency">UGX</span> 250,000</div>
+            <div class="price-desc">Approximately 29.7 × 42 cm. Perfect for home décor, offices, and gifting.</div>
+          </div>
+          <div class="pricing-features">
+            <div class="feature-item"><i class="fas fa-check-circle"></i> 100% Original Handpainted</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Professionally Framed</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Ready to Hang</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Certificate of Originality</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Custom Subjects Available</div>
+          </div>
+          <div class="pricing-cta">
+            <a href="#contact" class="btn-primary" style="width:100%; justify-content:center; border-radius:8px;">
+              <i class="fas fa-palette"></i> Order A3 Painting
+            </a>
+          </div>
+        </div>
+
+        <!-- A2 -->
+        <div class="pricing-card featured reveal">
+          <div class="featured-tag">Most Popular</div>
+          <div class="pricing-top">
+            <div class="price-label">Large Format</div>
+            <div class="price-title">A2 Painting</div>
+            <div class="price-amount" style="color:var(--accent);"><span class="currency" style="color:var(--accent);">UGX</span> 350,000</div>
+            <div class="price-desc">Approximately 42 × 59.4 cm. Bold statement piece for feature walls and galleries.</div>
+          </div>
+          <div class="pricing-features">
+            <div class="feature-item"><i class="fas fa-check-circle"></i> 100% Original Handpainted</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Premium Frame Included</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Ready to Hang</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Certificate of Originality</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Custom Subjects Available</div>
+            <div class="feature-item"><i class="fas fa-check-circle"></i> Larger Impact, More Detail</div>
+          </div>
+          <div class="pricing-cta">
+            <a href="#contact" class="btn-primary" style="width:100%; justify-content:center; border-radius:8px; background:var(--accent); box-shadow:0 8px 30px rgba(212,165,116,0.4);">
+              <i class="fas fa-palette"></i> Order A2 Painting
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Commission CTA -->
+      <div class="reveal" style="margin-top:3rem; background: linear-gradient(135deg, var(--primary) 0%, #4a2518 100%); border-radius:12px; padding:3rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem;">
+        <div>
+          <div style="font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:0.5rem;">Custom Orders</div>
+          <h3 style="color:white; font-size:1.8rem; font-weight:700; margin-bottom:0.5rem;">Want something specific?</h3>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem;">Portraits, landscapes, animals, abstract — we paint it for you. Contact us to discuss your vision.</p>
+        </div>
+        <a href="https://wa.me/256750501408?text=Hi%20Mujuni%20BK%20Arts!%20I%20would%20like%20to%20commission%20a%20custom%20painting." target="_blank" class="btn-primary" style="white-space:nowrap;">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-label reveal" style="justify-content:center;">Happy Collectors</div>
+      <h2 class="section-title reveal" style="text-align:center;">What our customers say</h2>
+      <div class="testimonials-grid" style="margin-top:3rem;">
+
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"Bought an A2 painting for my living room. The quality is incredible — the colours are so vibrant and the frame is beautifully made. Everyone who visits asks about it!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div>
+              <div class="author-name">Amina Nakato</div>
+              <div class="author-location">Kampala, Uganda</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"I commissioned a custom portrait and Mujuni BK absolutely nailed it. Ready in less than a week, perfectly framed, and looked even better in person than in the photos."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">D</div>
+            <div>
+              <div class="author-name">David Ssekandi</div>
+              <div class="author-location">Entebbe, Uganda</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="testimonial-text">"Best gift I ever gave my parents — an A2 painting of their home village. The emotion in the brushwork is something else. Worth every shilling and more!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">R</div>
+            <div>
+              <div class="author-name">Ruth Apio</div>
+              <div class="author-location">Jinja, Uganda</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <div class="section-label reveal">Get in Touch</div>
+          <h2 class="section-title reveal">Order a Painting<br>or Commission One</h2>
+          <p class="section-sub reveal">Ready to own a piece of original Ugandan art? Reach out via any channel below — we respond fast.</p>
+
+          <div class="contact-infos">
+            <div class="contact-item reveal">
+              <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+              <div>
+                <div class="contact-label">Call or WhatsApp</div>
+                <a class="contact-value" href="tel:+256750501408">0750 501 408</a>
+              </div>
+            </div>
+            <div class="contact-item reveal">
+              <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+              <div>
+                <div class="contact-label">Instagram</div>
+                <a class="contact-value" href="https://instagram.com/mujunibkarts" target="_blank">@mujunibkarts</a>
+              </div>
+            </div>
+            <div class="contact-item reveal">
+              <div class="contact-icon"><i class="fab fa-facebook"></i></div>
+              <div>
+                <div class="contact-label">Facebook</div>
+                <a class="contact-value" href="https://facebook.com/mujunibkarts" target="_blank">mujunibkarts</a>
+              </div>
+            </div>
+            <div class="contact-item reveal">
+              <div class="contact-icon"><i class="fab fa-tiktok"></i></div>
+              <div>
+                <div class="contact-label">TikTok</div>
+                <a class="contact-value" href="https://tiktok.com/@mujunibkarts" target="_blank">@mujunibkarts</a>
+              </div>
+            </div>
+            <div class="contact-item reveal">
+              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <div class="contact-label">Location</div>
+                <span class="contact-value">Kampala, Uganda</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a class="social-link" href="https://wa.me/256750501408" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a class="social-link" href="https://instagram.com/mujunibkarts" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="social-link" href="https://facebook.com/mujunibkarts" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a class="social-link" href="https://tiktok.com/@mujunibkarts" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="contact-form reveal">
+          <h3 style="color:white; font-size:1.5rem; font-weight:600; margin-bottom:0.5rem; font-family:'Playfair Display',serif;">Send an Inquiry</h3>
+          <p style="color:rgba(255,255,255,0.5); font-size:0.82rem; margin-bottom:2rem;">Fill in the form and we'll get back to you within 24 hours.</p>
+
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Jane Namukasa">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" placeholder="e.g. 0712 345 678">
+          </div>
+          <div class="form-group">
+            <label class="form-label">I'm interested in</label>
+            <select class="form-select form-input">
+              <option value="">Choose an option...</option>
+              <option>A3 Painting — UGX 250,000</option>
+              <option>A2 Painting — UGX 350,000</option>
+              <option>Custom Commission (any size)</option>
+              <option>Multiple Paintings</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message / Art Description</label>
+            <textarea class="form-textarea" placeholder="Describe what you'd like — subject, colours, style, or just ask a question..."></textarea>
+          </div>
+
+          <button class="btn-primary" style="width:100%; justify-content:center; border-radius:8px; padding:1.1rem; font-size:0.85rem;" onclick="submitForm()">
+            <i class="fas fa-paper-plane"></i> Send Inquiry
+          </button>
+
+          <p style="text-align:center; margin-top:1.25rem; font-size:0.75rem; color:rgba(255,255,255,0.35);">
+            Or WhatsApp directly: <a href="https://wa.me/256750501408" style="color:var(--accent);">0750 501 408</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <div class="logo-wrap" style="text-decoration:none;">
+          <span class="logo-text">Mujuni BK Arts</span>
+          <span class="logo-sub">Original Handpainted Artworks · Uganda</span>
+        </div>
+        <p class="footer-desc">
+          Every painting is an original, handcrafted by Mujuni BK — bringing colour, life, and beauty into homes across Uganda and beyond.
+        </p>
+        <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
+          <a class="social-link" href="https://wa.me/256750501408" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a class="social-link" href="https://instagram.com/mujunibkarts" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="social-link" href="https://facebook.com/mujunibkarts" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a class="social-link" href="https://tiktok.com/@mujunibkarts" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#about">About the Artist</a></li>
+          <li><a href="#contact">Order / Inquire</a></li>
+          <li><a href="https://wa.me/256750501408" target="_blank">WhatsApp Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+256750501408">0750 501 408</a></li>
+          <li><a href="https://instagram.com/mujunibkarts" target="_blank">@mujunibkarts</a></li>
+          <li><a href="https://facebook.com/mujunibkarts" target="_blank">mujunibkarts</a></li>
+          <li><a href="https://tiktok.com/@mujunibkarts" target="_blank">@mujunibkarts</a></li>
+          <li><span style="color:rgba(244,228,193,0.4);">Kampala, Uganda</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom" style="max-width:1280px; margin:0 auto; padding-top:2rem;">
+      <p class="footer-copy">&copy; 2026 Mujuni BK Arts. All artworks are original and handpainted.</p>
+      <p class="footer-copy">Social: <span style="color:var(--accent);">@mujunibkarts</span> on all platforms</p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)"><i class="fas fa-chevron-right"></i></button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <div class="lightbox-info">
+      <div class="lightbox-title" id="lightboxTitle"></div>
+      <div class="lightbox-price" id="lightboxPrice"></div>
+      <button class="btn-primary" style="margin-top:1rem;" id="lightboxOrder" onclick="orderPiece('')">
+        <i class="fas fa-shopping-bag"></i> Order This Piece
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ======= GALLERY DATA =======
+    const artworks = [
+      { src: './images/IMG-20260731-WA0029.jpg', title: 'Masterpiece No. 1',  size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0020.jpg', title: 'Masterpiece No. 2',  size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0016.jpg', title: 'Masterpiece No. 3',  size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0019.jpg', title: 'Masterpiece No. 4',  size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0018.jpg', title: 'Masterpiece No. 5',  size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0021.jpg', title: 'Masterpiece No. 6',  size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0014.jpg', title: 'Masterpiece No. 7',  size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0010.jpg', title: 'Masterpiece No. 8',  size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0009.jpg', title: 'Masterpiece No. 9',  size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0006.jpg', title: 'Masterpiece No. 10', size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0005.jpg', title: 'Masterpiece No. 11', size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0002.jpg', title: 'Masterpiece No. 12', size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0028.jpg', title: 'Masterpiece No. 13', size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0024.jpg', title: 'Masterpiece No. 14', size: 'A3', price: 'UGX 250,000' },
+      { src: './images/IMG-20260731-WA0022.jpg', title: 'Masterpiece No. 15', size: 'A2', price: 'UGX 350,000' },
+      { src: './images/IMG-20260731-WA0014(1).jpg', title: 'Masterpiece No. 16', size: 'A3', price: 'UGX 250,000' },
+    ];
+
+    let currentLightboxIndex = 0;
+
+    // ======= NAV SCROLL =======
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // ======= MOBILE NAV =======
+    function openMobileNav() {
+      document.getElementById('mobileNav').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ======= HERO SLIDESHOW =======
+    (function() {
+      const slides = document.querySelectorAll('.hero-slide');
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, 4000);
+    })();
+
+    // ======= HERO GSAP ENTRANCE =======
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to('#heroEyebrow', { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
+      gsap.to('#heroTitle',   { opacity: 1, y: 0, duration: 1, delay: 0.6, ease: 'power3.out' });
+      gsap.to('#heroTagline', { opacity: 1, y: 0, duration: 1, delay: 0.9, ease: 'power3.out' });
+      gsap.to('#heroCta',     { opacity: 1, y: 0, duration: 1, delay: 1.1, ease: 'power3.out' });
+
+      // Animate all artwork cards on scroll
+      gsap.utils.toArray('.artwork-card').forEach((card, i) => {
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          delay: (i % 4) * 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+          }
+        });
+      });
+
+      // Animate pricing, testimonial, contact cards
+      gsap.utils.toArray('.pricing-card').forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
+      });
+
+      gsap.utils.toArray('.testimonial-card').forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
+      });
+
+      // Generic reveal
+      document.querySelectorAll('.reveal').forEach(el => {
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
+      });
+    });
+
+    // ======= GALLERY FILTER =======
+    function filterGallery(type, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.artwork-card').forEach(card => {
+        if (type === 'all' || card.dataset.size === type) {
+          card.style.display = '';
+          gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // ======= LIGHTBOX =======
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOnBg(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    function lightboxNav(dir) {
+      currentLightboxIndex = (currentLightboxIndex + dir + artworks.length) % artworks.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const art = artworks[currentLightboxIndex];
+      const img = document.getElementById('lightboxImg');
+      img.style.opacity = 0;
+      img.src = art.src;
+      img.onload = () => { img.style.transition = 'opacity 0.4s'; img.style.opacity = 1; };
+      document.getElementById('lightboxTitle').textContent = art.title + ' · ' + art.size + ' · Framed';
+      document.getElementById('lightboxPrice').textContent = art.price;
+      const btn = document.getElementById('lightboxOrder');
+      btn.onclick = () => orderPiece(art.title);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') lightboxNav(1);
+      if (e.key === 'ArrowLeft') lightboxNav(-1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ======= ORDER FUNCTION =======
+    function orderPiece(title) {
+      const msg = title
+        ? `Hi Mujuni BK Arts! I'd like to order: ${title}. Please let me know availability and delivery.`
+        : `Hi Mujuni BK Arts! I'm interested in one of your paintings. Please share details.`;
+      window.open('https://wa.me/256750501408?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    // ======= CONTACT FORM =======
+    function submitForm() {
+      const name  = document.querySelector('.form-input[placeholder*="Jane"]').value.trim();
+      const phone = document.querySelector('.form-input[placeholder*="0712"]').value.trim();
+      if (!name || !phone) {
+        alert('Please fill in your name and phone number.');
+        return;
+      }
+      const interest = document.querySelector('.form-select').value;
+      const message  = document.querySelector('.form-textarea').value.trim();
+      const text = `Hi Mujuni BK Arts!\n\nName: ${name}\nPhone: ${phone}\nInterested in: ${interest || 'Not specified'}\n\n${message || ''}`.trim();
+      window.open('https://wa.me/256750501408?text=' + encodeURIComponent(text), '_blank');
+    }
+
+    // ======= SMOOTH SCROLL =======
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
