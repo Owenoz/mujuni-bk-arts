@@ -61,6 +61,11 @@
     .hero-title .hl{color:var(--a);font-style:italic;}
     .hero-title .script{display:block;font-family:'Dancing Script',cursive;font-size:.55em;color:var(--a);line-height:1.4;font-weight:700;}
     .hero-tagline{font-size:1.05rem;color:rgba(244,228,193,.75);font-weight:300;line-height:1.7;margin-bottom:2.5rem;max-width:520px;opacity:0;}
+    .hero-motto{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.2rem;opacity:0;transform:translateY(20px);}
+    .motto-text{font-family:'Dancing Script',cursive;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:#fff;letter-spacing:.05em;white-space:nowrap;text-shadow:0 2px 20px rgba(212,165,116,.4);}
+    .motto-text span{color:var(--a);}
+    .motto-line{flex:1;max-width:55px;height:1px;background:linear-gradient(to right,transparent,var(--a));opacity:.7;}
+    .motto-line:last-child{background:linear-gradient(to left,transparent,var(--a));}
     .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;}
     .btn-gold{background:linear-gradient(135deg,#f4e4c1,var(--a),var(--a2));color:var(--dk);padding:.95rem 2.4rem;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:all .4s ease;display:inline-flex;align-items:center;gap:.6rem;box-shadow:0 8px 30px rgba(212,165,116,.4);position:relative;overflow:hidden;}
     .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:.6s;}
@@ -339,6 +344,11 @@
         Every <span class="hl">stroke</span><br>tells a story.
       </h1>
       <p class="hero-tagline" id="hTagline">Handcrafted paintings — each one unique, painted with love and raw passion. Professionally framed and ready to transform your space.</p>
+      <div class="hero-motto" id="hMotto">
+        <span class="motto-line"></span>
+        <span class="motto-text">Say it &nbsp;·&nbsp; Have it</span>
+        <span class="motto-line"></span>
+      </div>
       <div class="hero-cta" id="hCta">
         <a href="#gallery" class="btn-gold"><i class="fas fa-images"></i> View Gallery</a>
         <a href="#pricing" class="btn-ghost"><i class="fas fa-tag"></i> See Prices</a>
@@ -357,12 +367,14 @@
       <div class="t-item"><span class="t-dot"></span>Call / WhatsApp: 0750 501 408</div>
       <div class="t-item"><span class="t-dot"></span>Follow @mujunibkarts on all socials</div>
       <div class="t-item"><span class="t-dot"></span>Custom commissions open</div>
+      <div class="t-item"><span class="t-dot"></span>Say it · Have it</div>
       <div class="t-item"><span class="t-dot"></span>A3 Framed Painting — UGX 250,000</div>
       <div class="t-item"><span class="t-dot"></span>A2 Framed Painting — UGX 350,000</div>
       <div class="t-item"><span class="t-dot"></span>All works handpainted by Mujuni BK</div>
       <div class="t-item"><span class="t-dot"></span>Call / WhatsApp: 0750 501 408</div>
       <div class="t-item"><span class="t-dot"></span>Follow @mujunibkarts on all socials</div>
       <div class="t-item"><span class="t-dot"></span>Custom commissions open</div>
+      <div class="t-item"><span class="t-dot"></span>Say it · Have it</div>
     </div>
   </div>
 
@@ -751,7 +763,8 @@
       .to('#hTag',    {opacity:1,y:0,duration:.9,delay:.4,ease:'power3.out'})
       .to('#hTitle',  {opacity:1,y:0,duration:1, ease:'power3.out'},'-=.5')
       .to('#hTagline',{opacity:1,y:0,duration:.9,ease:'power3.out'},'-=.5')
-      .to('#hCta',    {opacity:1,y:0,duration:.9,ease:'power3.out'},'-=.5');
+      .to('#hMotto',  {opacity:1,y:0,duration:.8,ease:'back.out(1.4)'},'-=.4')
+      .to('#hCta',    {opacity:1,y:0,duration:.9,ease:'power3.out'},'-=.4');
 
     // Gallery cards
     gsap.utils.toArray('.art-card').forEach((c,i)=>{
