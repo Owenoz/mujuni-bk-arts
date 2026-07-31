@@ -1220,6 +1220,59 @@
   window.addEventListener('DOMContentLoaded', () => {
     // (appended after main DOMContentLoaded — safe to call gsap directly)
   });
+  // ── LOAD ADMIN-UPLOADED ARTWORKS INTO GALLERY ──────────────────────────────
+  (function injectAdminArtworks() {
+    try {
+      const stored = JSON.parse(localStorage.getItem('mbk_admin_artworks') || '[]');
+      const visible = stored.filter(a => a.visible !== false);
+      if (!visible.length) return;
+
+      const grid = document.getElementById('gGrid');
+      if (!grid) return;
+
+      visible.forEach((a, i) => {
+        const idx = ART.length; // append after existing
+        ART.push({ src: a.src, title: a.title, size: a.size, price: a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000' });
+
+        const card = document.createElement('div');
+        card.className = 'art-card';
+        card.dataset.size = a.size ? a.size.toLowerCase() : 'a2';
+        card.dataset.idx = idx;
+        card.setAttribute('onclick', `openLB(${idx})`);
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px) scale(.96)';
+
+        const price = a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000';
+        card.innerHTML = `
+          <div class="card-img-wrap">
+            <span class="badge-new">New</span>
+            <img src="${a.src}" alt="${a.title}" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-cat">${a.cat || 'Oil on Canvas'} · ${a.size}</div>
+              <h3 class="card-ttl">${a.title}</h3>
+              <div class="card-foot">
+                <div>
+                  <div class="card-price">${price}</div>
+                  <div class="card-sz">${a.size} · Framed</div>
+                </div>
+                <button class="c-buy" onclick="event.stopPropagation();order('${a.title}')">
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </div>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+
+        // Animate in
+        setTimeout(() => {
+          card.style.transition = 'opacity .6s ease, transform .6s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0) scale(1)';
+        }, 100 + i * 80);
+      });
+    } catch(e) { console.warn('Admin artworks load error:', e); }
+  })();
+
   // ── SMOOTH SCROLL ──
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
