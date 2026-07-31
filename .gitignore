@@ -9,3 +9,7 @@ Thumbs.db
 # Kombai internal
 .kombai/canvas/
 .kombai/package.json
+
+# Videos too large for GitHub (serve locally or via Cloudinary)
+ALL/*.mp4
+.vercel

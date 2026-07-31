@@ -291,6 +291,39 @@
 
     /* ── REVEAL ── */
     .reveal{opacity:0;transform:translateY(40px);}
+
+    /* ── VIDEO SECTION ── */
+    .video-section{background:#0a0806;padding:8rem 2rem;}
+    .video-section .s-title{color:#fff;}
+    .video-section .s-sub{color:rgba(244,228,193,.55);}
+    .vid-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem;}
+    .vid-card{position:relative;border-radius:4px;overflow:hidden;cursor:none;background:#0e0b08;opacity:0;transform:translateY(40px);}
+    .vid-thumb{position:relative;aspect-ratio:9/16;overflow:hidden;}
+    .vid-thumb video{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);filter:brightness(.75) saturate(.8);}
+    .vid-card:hover .vid-thumb video{transform:scale(1.06);filter:brightness(1) saturate(1.1);}
+    .vid-thumb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,6,.95) 0%,rgba(10,8,6,.2) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;transition:all .4s;}
+    .vid-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);width:52px;height:52px;border-radius:50%;background:rgba(212,165,116,.9);border:none;color:#0a0806;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .4s ease;opacity:0;cursor:none;}
+    .vid-card:hover .vid-play-btn{opacity:1;transform:translate(-50%,-50%) scale(1);}
+    .vid-card:hover .vid-thumb-overlay{background:linear-gradient(to top,rgba(10,8,6,.98) 0%,rgba(10,8,6,.4) 55%,rgba(212,165,116,.06) 100%);}
+    .vid-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.25rem;transform:translateY(6px);transition:transform .4s;}
+    .vid-card:hover .vid-title{transform:translateY(0);}
+    .vid-tag{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--a);opacity:0;transform:translateY(6px);transition:all .4s .05s;}
+    .vid-card:hover .vid-tag{opacity:1;transform:translateY(0);}
+    /* Video lightbox */
+    .vid-lb{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;pointer-events:none;transition:background .4s;}
+    .vid-lb.open{background:rgba(0,0,0,.97);pointer-events:all;}
+    .vid-lb-inner{opacity:0;transform:scale(.9);transition:all .45s ease;max-width:min(900px,94vw);width:100%;}
+    .vid-lb.open .vid-lb-inner{opacity:1;transform:scale(1);}
+    .vid-lb video{width:100%;border-radius:6px;box-shadow:0 40px 120px rgba(0,0,0,.9);display:block;max-height:80vh;}
+    .vid-lb-close{position:absolute;top:1.5rem;right:1.5rem;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1.2rem;cursor:none;transition:all .3s;display:flex;align-items:center;justify-content:center;}
+    .vid-lb-close:hover{background:var(--a);color:#0a0806;}
+    .vid-lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1.2rem;cursor:none;transition:all .3s;display:flex;align-items:center;justify-content:center;}
+    .vid-lb-nav:hover{background:var(--a);color:#0a0806;}
+    .vid-lb-prev{left:1.5rem;}.vid-lb-next{right:1.5rem;}
+    .vid-lb-info{text-align:center;margin-top:1.25rem;color:rgba(255,255,255,.6);font-size:.8rem;letter-spacing:.1em;}
+    @media(max-width:1024px){.vid-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:768px){.vid-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:480px){.vid-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -307,6 +340,7 @@
     <a href="#gallery" onclick="closeMob()">Gallery</a>
     <a href="#pricing" onclick="closeMob()">Pricing</a>
     <a href="#about" onclick="closeMob()">About</a>
+    <a href="#videos" onclick="closeMob()">Videos</a>
     <a href="#contact" onclick="closeMob()">Order Now</a>
     <a href="tel:+256750501408" style="color:var(--a);font-size:1.1rem;margin-top:.5rem;"><i class="fas fa-phone"></i> 0750 501 408</a>
   </div>
@@ -319,7 +353,7 @@
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#contact">Order</a></li>
+        <li><a href="#videos">Videos</a></li><li><a href="#contact">Order</a></li>
       </ul>
       <a href="tel:+256750501408" class="nav-tel"><i class="fas fa-phone-alt"></i> 0750 501 408</a>
       <div class="hamburger" onclick="openMob()"><span></span><span></span><span></span></div>
@@ -412,6 +446,22 @@
       <img class="marquee-img" src="./images/IMG-20260731-WA0024.jpg" alt="">
       <img class="marquee-img" src="./images/IMG-20260731-WA0028.jpg" alt="">
       <img class="marquee-img" src="./images/IMG-20260731-WA0029.jpg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-36.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-36a.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-39.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-39a.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-42.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-44-59.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-45-09.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-48-00.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-48-02.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-48-19.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-30.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-33.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-33a.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-34.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-34a.jpeg" alt="">
+      <img class="marquee-img" src="./ALL/img-19-49-35.jpeg" alt="">
     </div>
   </div>
 
@@ -508,6 +558,23 @@
         <div class="art-card" data-size="a3" data-idx="13" onclick="openLB(13)"><div class="card-img-wrap"><img src="./images/IMG-20260731-WA0024.jpg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Mixed Media · A3</div><h3 class="card-ttl">Masterpiece No. 14</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 14')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
         <div class="art-card" data-size="a2" data-idx="14" onclick="openLB(14)"><div class="card-img-wrap"><img src="./images/IMG-20260731-WA0022.jpg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 15</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 15')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
         <div class="art-card" data-size="a3" data-idx="15" onclick="openLB(15)"><div class="card-img-wrap"><span class="badge-new">New</span><img src="./images/IMG-20260731-WA0014(1).jpg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Acrylic · A3</div><h3 class="card-ttl">Masterpiece No. 16</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 16')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+
+        <div class="art-card" data-size="a2" data-idx="16" onclick="openLB(16)"><div class="card-img-wrap"><img src="./ALL/img-19-44-36.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 17</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 17')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="17" onclick="openLB(17)"><div class="card-img-wrap"><img src="./ALL/img-19-44-36a.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Acrylic · A3</div><h3 class="card-ttl">Masterpiece No. 18</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 18')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="18" onclick="openLB(18)"><div class="card-img-wrap"><img src="./ALL/img-19-44-39.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 19</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 19')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="19" onclick="openLB(19)"><div class="card-img-wrap"><img src="./ALL/img-19-44-39a.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Mixed Media · A3</div><h3 class="card-ttl">Masterpiece No. 20</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 20')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="20" onclick="openLB(20)"><div class="card-img-wrap"><img src="./ALL/img-19-44-42.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 21</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 21')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="21" onclick="openLB(21)"><div class="card-img-wrap"><img src="./ALL/img-19-44-59.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Acrylic · A3</div><h3 class="card-ttl">Masterpiece No. 22</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 22')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="22" onclick="openLB(22)"><div class="card-img-wrap"><img src="./ALL/img-19-45-09.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 23</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 23')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="23" onclick="openLB(23)"><div class="card-img-wrap"><img src="./ALL/img-19-48-00.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Mixed Media · A3</div><h3 class="card-ttl">Masterpiece No. 24</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 24')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="24" onclick="openLB(24)"><div class="card-img-wrap"><img src="./ALL/img-19-48-02.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 25</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 25')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="25" onclick="openLB(25)"><div class="card-img-wrap"><img src="./ALL/img-19-48-19.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Acrylic · A3</div><h3 class="card-ttl">Masterpiece No. 26</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 26')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="26" onclick="openLB(26)"><div class="card-img-wrap"><img src="./ALL/img-19-49-30.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 27</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 27')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="27" onclick="openLB(27)"><div class="card-img-wrap"><img src="./ALL/img-19-49-33.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Mixed Media · A3</div><h3 class="card-ttl">Masterpiece No. 28</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 28')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="28" onclick="openLB(28)"><div class="card-img-wrap"><img src="./ALL/img-19-49-33a.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 29</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 29')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="29" onclick="openLB(29)"><div class="card-img-wrap"><img src="./ALL/img-19-49-34.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Acrylic · A3</div><h3 class="card-ttl">Masterpiece No. 30</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 30')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a2" data-idx="30" onclick="openLB(30)"><div class="card-img-wrap"><img src="./ALL/img-19-49-34a.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Oil on Canvas · A2</div><h3 class="card-ttl">Masterpiece No. 31</h3><div class="card-foot"><div><div class="card-price">UGX 350,000</div><div class="card-sz">A2 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 31')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
+        <div class="art-card" data-size="a3" data-idx="31" onclick="openLB(31)"><div class="card-img-wrap"><img src="./ALL/img-19-49-35.jpeg" alt="" loading="lazy"><div class="card-overlay"><div class="card-cat">Mixed Media · A3</div><h3 class="card-ttl">Masterpiece No. 32</h3><div class="card-foot"><div><div class="card-price">UGX 250,000</div><div class="card-sz">A3 · Framed</div></div><button class="c-buy" onclick="event.stopPropagation();order('Masterpiece No. 32')"><i class="fas fa-shopping-bag"></i></button></div></div></div></div>
       </div>
     </div>
   </section>
@@ -641,6 +708,188 @@
       <div><div class="foot-h">Contact</div><ul class="foot-links"><li><a href="tel:+256750501408">0750 501 408</a></li><li><a href="https://instagram.com/mujunibkarts" target="_blank">@mujunibkarts</a></li><li><a href="https://facebook.com/mujunibkarts" target="_blank">mujunibkarts</a></li><li><a href="https://tiktok.com/@mujunibkarts" target="_blank">@mujunibkarts</a></li><li><span style="color:rgba(244,228,193,.35);">Kampala, Uganda</span></li></ul></div>
     </div>
     <div class="foot-bot"><p class="foot-copy">&copy; 2026 Mujuni BK Arts. All artworks are original and handpainted.</p><p class="foot-copy">Social: <span style="color:var(--a);">@mujunibkarts</span> everywhere</p></div>
+
+  <!-- VIDEOS SECTION -->
+  <section class="video-section" id="videos">
+    <div class="container">
+      <div class="s-label reveal">Behind the Brush</div>
+      <h2 class="s-title reveal">Watch the art come alive</h2>
+      <p class="s-sub reveal">Real studio videos — see the brushwork, the process, and the passion behind every painting.</p>
+      <div class="vid-grid" id="vidGrid">
+        <div class="vid-card" onclick="openVidLB(0)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-44-42.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Studio Session 1</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(1)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-44-57.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Studio Session 2</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(2)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-45-01.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Brushwork Process</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(3)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-45-23.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Canvas in Motion</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(4)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-45-31.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Painting Live</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(5)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-45-34.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Artist at Work</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(6)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-48-00.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Creative Flow 1</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(7)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-48-01.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Creative Flow 2</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(8)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-48-02.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Colour Study</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(9)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-48-19.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Layering Technique</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(10)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-27.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Studio Vibes</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(11)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-29.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Final Touches</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(12)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-31.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">The Reveal 1</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(13)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-32.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">The Reveal 2</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(14)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-32a.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">The Reveal 3</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+        <div class="vid-card" onclick="openVidLB(15)">
+          <div class="vid-thumb">
+            <video src="./ALL/vid-19-49-32b.mp4" muted loop playsinline preload="metadata"></video>
+            <div class="vid-thumb-overlay">
+              <button class="vid-play-btn"><i class="fas fa-play"></i></button>
+              <div class="vid-title">Behind the Canvas</div>
+              <div class="vid-tag">Watch · Behind the Brush</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO LIGHTBOX -->
+  <div class="vid-lb" id="vidLb" onclick="closeVidLBBg(event)">
+    <button class="vid-lb-close" onclick="closeVidLB()"><i class="fas fa-times"></i></button>
+    <button class="vid-lb-nav vid-lb-prev" onclick="vidLbNav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="vid-lb-nav vid-lb-next" onclick="vidLbNav(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="vid-lb-inner">
+      <video id="vidLbPlayer" controls playsinline style="width:100%;border-radius:6px;max-height:80vh;display:block;"></video>
+      <div class="vid-lb-info" id="vidLbInfo"></div>
+    </div>
+  </div>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -655,22 +904,48 @@
   <script>
   // ── GALLERY DATA ──
   const ART = [
-    {src:'./images/IMG-20260731-WA0029.jpg',title:'Masterpiece No. 1', size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0020.jpg',title:'Masterpiece No. 2', size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0016.jpg',title:'Masterpiece No. 3', size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0019.jpg',title:'Masterpiece No. 4', size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0018.jpg',title:'Masterpiece No. 5', size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0021.jpg',title:'Masterpiece No. 6', size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0014.jpg',title:'Masterpiece No. 7', size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0010.jpg',title:'Masterpiece No. 8', size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0009.jpg',title:'Masterpiece No. 9', size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0006.jpg',title:'Masterpiece No. 10',size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0005.jpg',title:'Masterpiece No. 11',size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0002.jpg',title:'Masterpiece No. 12',size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0028.jpg',title:'Masterpiece No. 13',size:'A2',price:'UGX 350,000'},
-    {src:'./images/IMG-20260731-WA0024.jpg',title:'Masterpiece No. 14',size:'A3',price:'UGX 250,000'},
-    {src:'./images/IMG-20260731-WA0022.jpg',title:'Masterpiece No. 15',size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0029.jpg',   title:'Masterpiece No. 1', size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0020.jpg',   title:'Masterpiece No. 2', size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0016.jpg',   title:'Masterpiece No. 3', size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0019.jpg',   title:'Masterpiece No. 4', size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0018.jpg',   title:'Masterpiece No. 5', size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0021.jpg',   title:'Masterpiece No. 6', size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0014.jpg',   title:'Masterpiece No. 7', size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0010.jpg',   title:'Masterpiece No. 8', size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0009.jpg',   title:'Masterpiece No. 9', size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0006.jpg',   title:'Masterpiece No. 10',size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0005.jpg',   title:'Masterpiece No. 11',size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0002.jpg',   title:'Masterpiece No. 12',size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0028.jpg',   title:'Masterpiece No. 13',size:'A2',price:'UGX 350,000'},
+    {src:'./images/IMG-20260731-WA0024.jpg',   title:'Masterpiece No. 14',size:'A3',price:'UGX 250,000'},
+    {src:'./images/IMG-20260731-WA0022.jpg',   title:'Masterpiece No. 15',size:'A2',price:'UGX 350,000'},
     {src:'./images/IMG-20260731-WA0014(1).jpg',title:'Masterpiece No. 16',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-44-36.jpeg', title:'Masterpiece No. 17',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-44-36a.jpeg',title:'Masterpiece No. 18',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-44-39.jpeg', title:'Masterpiece No. 19',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-44-39a.jpeg',title:'Masterpiece No. 20',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-44-42.jpeg', title:'Masterpiece No. 21',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-44-59.jpeg', title:'Masterpiece No. 22',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-45-09.jpeg', title:'Masterpiece No. 23',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-48-00.jpeg', title:'Masterpiece No. 24',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-48-02.jpeg', title:'Masterpiece No. 25',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-48-19.jpeg', title:'Masterpiece No. 26',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-49-30.jpeg', title:'Masterpiece No. 27',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-49-33.jpeg', title:'Masterpiece No. 28',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-49-33a.jpeg',title:'Masterpiece No. 29',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-49-34.jpeg', title:'Masterpiece No. 30',size:'A3',price:'UGX 250,000'},
+    {src:'./ALL/img-19-49-34a.jpeg',title:'Masterpiece No. 31',size:'A2',price:'UGX 350,000'},
+    {src:'./ALL/img-19-49-35.jpeg', title:'Masterpiece No. 32',size:'A3',price:'UGX 250,000'},
+  ];
+  const VIDS = [
+    {f:'vid-19-44-42',n:'Studio Session 1'},{f:'vid-19-44-57',n:'Studio Session 2'},
+    {f:'vid-19-45-01',n:'Brushwork Process'},{f:'vid-19-45-23',n:'Canvas Detail'},
+    {f:'vid-19-45-31',n:'Painting in Motion'},{f:'vid-19-45-34',n:'Artist at Work'},
+    {f:'vid-19-48-00',n:'Creative Flow 1'},{f:'vid-19-48-01',n:'Creative Flow 2'},
+    {f:'vid-19-48-02',n:'Colour Study'},{f:'vid-19-48-19',n:'Layering Technique'},
+    {f:'vid-19-49-27',n:'Studio Vibes'},{f:'vid-19-49-29',n:'Final Touches'},
+    {f:'vid-19-49-31',n:'The Reveal 1'},{f:'vid-19-49-32',n:'The Reveal 2'},
+    {f:'vid-19-49-32a',n:'The Reveal 3'},{f:'vid-19-49-32b',n:'Behind the Canvas'},
   ];
   let lbIdx=0;
 
@@ -901,6 +1176,50 @@
     window.open('https://wa.me/256750501408?text='+encodeURIComponent(txt),'_blank');
   }
 
+
+  // ── VIDEO HOVER AUTOPLAY ──────────────────────────────────────────────────
+  document.querySelectorAll('.vid-card').forEach(card => {
+    const vid = card.querySelector('video');
+    card.addEventListener('mouseenter', () => { if(vid) vid.play(); });
+    card.addEventListener('mouseleave', () => { if(vid){ vid.pause(); vid.currentTime=0; } });
+  });
+
+  // ── VIDEO LIGHTBOX ────────────────────────────────────────────────────────
+  let vlbIdx = 0;
+  function openVidLB(i) {
+    vlbIdx = i; updateVidLB();
+    document.getElementById('vidLb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVidLB() {
+    const p = document.getElementById('vidLbPlayer');
+    p.pause(); p.src = '';
+    document.getElementById('vidLb').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeVidLBBg(e) { if(e.target.id === 'vidLb') closeVidLB(); }
+  function vidLbNav(d) {
+    vlbIdx = (vlbIdx + d + VIDS.length) % VIDS.length;
+    updateVidLB();
+  }
+  function updateVidLB() {
+    const v = VIDS[vlbIdx];
+    const p = document.getElementById('vidLbPlayer');
+    p.src = './ALL/' + v.f + '.mp4';
+    p.load(); p.play();
+    document.getElementById('vidLbInfo').textContent = v.n + '  ·  ' + (vlbIdx+1) + ' / ' + VIDS.length;
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('vidLb').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') vidLbNav(1);
+    if (e.key === 'ArrowLeft')  vidLbNav(-1);
+    if (e.key === 'Escape')     closeVidLB();
+  });
+
+  // ── ANIMATE VID CARDS ─────────────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', () => {
+    // (appended after main DOMContentLoaded — safe to call gsap directly)
+  });
   // ── SMOOTH SCROLL ──
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
