@@ -14,14 +14,12 @@
     ::-webkit-scrollbar-track{background:var(--bg);}
     ::-webkit-scrollbar-thumb{background:var(--a);border-radius:5px;}
     ::selection{background:var(--a);color:var(--dk);}
-
-    /* ── SIDEBAR ── */
     .sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;padding:2rem 1.5rem;}
     .sb-logo{margin-bottom:2.5rem;}
     .sb-logo-name{font-family:'Dancing Script',cursive;font-size:1.6rem;font-weight:700;color:var(--a);display:block;}
     .sb-logo-tag{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,165,116,.4);margin-top:.15rem;}
     .sb-nav{flex:1;}
-    .sb-nav a{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border-radius:8px;color:rgba(244,228,193,.5);text-decoration:none;font-size:.82rem;font-weight:500;margin-bottom:.25rem;transition:all .25s;letter-spacing:.03em;}
+    .sb-nav a{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border-radius:8px;color:rgba(244,228,193,.5);text-decoration:none;font-size:.82rem;font-weight:500;margin-bottom:.25rem;transition:all .25s;letter-spacing:.03em;cursor:pointer;}
     .sb-nav a i{width:16px;text-align:center;font-size:.88rem;}
     .sb-nav a:hover{background:rgba(212,165,116,.08);color:rgba(244,228,193,.9);}
     .sb-nav a.active{background:rgba(212,165,116,.12);color:var(--a);}
@@ -30,8 +28,6 @@
     .sb-logout:hover{background:rgba(239,68,68,.08);color:#f87171;}
     .view-site{display:flex;align-items:center;gap:.8rem;padding:.75rem 1rem;border-radius:8px;color:rgba(244,228,193,.4);text-decoration:none;font-size:.82rem;font-weight:500;margin-bottom:.25rem;transition:all .25s;}
     .view-site:hover{color:var(--a);}
-
-    /* ── MAIN ── */
     .main{margin-left:240px;padding:2.5rem;}
     .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;}
     .page-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#fff;}
@@ -39,20 +35,14 @@
     .admin-badge{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.45rem 1rem .45rem .6rem;}
     .admin-dot{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--a),#c8955c);display:flex;align-items:center;justify-content:center;color:var(--dk);font-size:.8rem;font-weight:700;}
     .admin-name{font-size:.75rem;color:rgba(244,228,193,.7);font-weight:500;}
-
-    /* ── STATS ROW ── */
     .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:2.5rem;}
     .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:border-color .3s;}
     .stat-card:hover{border-color:rgba(212,165,116,.3);}
     .stat-icon{width:40px;height:40px;border-radius:8px;background:rgba(212,165,116,.1);display:flex;align-items:center;justify-content:center;color:var(--a);font-size:1rem;margin-bottom:1rem;}
     .stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1;}
     .stat-label{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,228,193,.35);margin-top:.3rem;}
-
-    /* ── UPLOAD PANEL ── */
     .panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;margin-bottom:2rem;}
     .panel-title{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--a);font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem;}
-    .panel-title i{font-size:.85rem;}
-
     .drop-zone{border:2px dashed rgba(212,165,116,.25);border-radius:10px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .3s;position:relative;background:rgba(212,165,116,.02);}
     .drop-zone.drag-over{border-color:var(--a);background:rgba(212,165,116,.08);}
     .drop-zone:hover{border-color:rgba(212,165,116,.5);background:rgba(212,165,116,.04);}
@@ -61,7 +51,6 @@
     .dz-text{color:rgba(244,228,193,.5);font-size:.88rem;margin-bottom:.4rem;}
     .dz-text span{color:var(--a);font-weight:600;}
     .dz-hint{font-size:.72rem;color:rgba(244,228,193,.25);}
-
     .upload-form{margin-top:1.75rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
     .f-grp{display:flex;flex-direction:column;gap:.4rem;}
     .f-grp.full{grid-column:span 2;}
@@ -70,20 +59,23 @@
     .f-in::placeholder{color:rgba(255,255,255,.2);}
     .f-in:focus,.f-sel:focus{border-color:var(--a);}
     .f-sel option{background:var(--p);}
-
-    .preview-strip{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem;min-height:0;}
+    .preview-strip{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem;}
     .preview-item{position:relative;width:90px;height:90px;border-radius:6px;overflow:hidden;border:2px solid rgba(212,165,116,.25);animation:popIn .3s ease;}
     @keyframes popIn{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
     .preview-item img{width:100%;height:100%;object-fit:cover;}
     .preview-remove{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(239,68,68,.9);border:none;color:#fff;font-size:.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-
-    .btn-upload{background:linear-gradient(135deg,#f4e4c1,var(--a),#c8955c);color:var(--dk);border:none;border-radius:8px;padding:.85rem 2rem;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .35s;display:flex;align-items:center;gap:.6rem;position:relative;overflow:hidden;margin-top:1.25rem;}
-    .btn-upload::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:.5s;}
-    .btn-upload:hover::before{left:100%;}
-    .btn-upload:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,165,116,.4);}
-    .btn-upload:disabled{opacity:.4;cursor:not-allowed;transform:none;}
-
-    /* ── GALLERY GRID ── */
+    .btn-gold{background:linear-gradient(135deg,#f4e4c1,var(--a),#c8955c);color:var(--dk);border:none;border-radius:8px;padding:.85rem 2rem;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .35s;display:inline-flex;align-items:center;gap:.6rem;position:relative;overflow:hidden;margin-top:1.25rem;}
+    .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:.5s;}
+    .btn-gold:hover::before{left:100%;}
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,165,116,.4);}
+    .btn-gold:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+    .btn-muted{background:rgba(255,255,255,.06);color:rgba(244,228,193,.6);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.85rem 1.5rem;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.6rem;margin-top:1.25rem;}
+    .btn-muted:hover{background:rgba(255,255,255,.1);}
+    .progress-bar-wrap{width:100%;background:rgba(255,255,255,.06);border-radius:50px;height:6px;margin-top:1rem;overflow:hidden;display:none;}
+    .progress-bar-wrap.show{display:block;}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--a),#c8955c);border-radius:50px;width:0%;transition:width .3s ease;}
+    .progress-label{font-size:.7rem;color:rgba(244,228,193,.4);margin-top:.4rem;text-align:center;display:none;}
+    .progress-label.show{display:block;}
     .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
     .g-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;position:relative;transition:all .35s;animation:popIn .4s ease;}
     .g-card:hover{border-color:rgba(212,165,116,.35);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5);}
@@ -98,71 +90,52 @@
     .btn-del:hover{background:rgba(239,68,68,.2);}
     .btn-vis{flex:1;background:rgba(212,165,116,.08);border:1px solid rgba(212,165,116,.15);border-radius:6px;color:var(--a);font-size:.68rem;padding:.45rem;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:.4rem;}
     .btn-vis:hover{background:rgba(212,165,116,.15);}
-    .g-card.hidden-card{opacity:.4;}
-    .hidden-badge{position:absolute;top:.5rem;right:.5rem;background:rgba(0,0,0,.7);color:rgba(255,255,255,.5);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;}
-    .source-badge{position:absolute;top:.5rem;left:.5rem;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:4px;font-weight:600;}
-    .source-badge.admin{background:rgba(212,165,116,.9);color:var(--dk);}
-    .source-badge.default{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
-
-    /* ── TOAST ── */
-    .toast{position:fixed;bottom:2rem;right:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);z-index:9999;max-width:320px;}
-    .toast.show{transform:translateY(0);opacity:1;}
-    .toast.success .toast-icon{color:#4ade80;}
-    .toast.error .toast-icon{color:#f87171;}
-    .toast-icon{font-size:1.1rem;}
-    .toast-msg{font-size:.82rem;color:rgba(244,228,193,.85);}
-
-    /* ── EMPTY STATE ── */
-    .empty{text-align:center;padding:4rem 2rem;color:rgba(244,228,193,.25);}
-    .empty i{font-size:3rem;margin-bottom:1rem;display:block;}
-    .empty p{font-size:.85rem;}
-
-    /* ── TABS ── */
+    .g-card.hidden-card{opacity:.45;}
+    .badge{position:absolute;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .55rem;border-radius:4px;font-weight:700;}
+    .badge-src{top:.5rem;left:.5rem;background:rgba(212,165,116,.9);color:var(--dk);}
+    .badge-src.default{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
+    .badge-hidden{top:.5rem;right:.5rem;background:rgba(0,0,0,.75);color:rgba(255,255,255,.5);}
     .tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;}
     .tab{padding:.5rem 1.2rem;border-radius:6px;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .25s;color:rgba(244,228,193,.4);}
     .tab.active{background:rgba(212,165,116,.12);border-color:rgba(212,165,116,.25);color:var(--a);}
     .tab:hover:not(.active){color:rgba(244,228,193,.7);}
-
+    .empty{text-align:center;padding:4rem 2rem;color:rgba(244,228,193,.25);grid-column:span 4;}
+    .empty i{font-size:3rem;margin-bottom:1rem;display:block;}
+    .empty p{font-size:.85rem;}
+    .toast{position:fixed;bottom:2rem;right:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;box-shadow:0 20px 60px rgba(0,0,0,.6);transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);z-index:9999;max-width:320px;}
+    .toast.show{transform:translateY(0);opacity:1;}
+    .toast.success .ti{color:#4ade80;}
+    .toast.error .ti{color:#f87171;}
+    .toast.info .ti{color:var(--a);}
+    .ti{font-size:1.1rem;}
+    .tm{font-size:.82rem;color:rgba(244,228,193,.85);}
+    .spinner-wrap{display:flex;align-items:center;justify-content:center;padding:3rem;grid-column:span 4;}
+    .spin{width:32px;height:32px;border:2px solid rgba(212,165,116,.2);border-top-color:var(--a);border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
     @media(max-width:900px){
       .sidebar{width:60px;padding:1rem .5rem;}.sb-logo,.sb-nav a span,.sb-logout span,.view-site span,.admin-name{display:none;}
-      .main{margin-left:60px;}.stats{grid-template-columns:repeat(2,1fr);}
-      .gallery-grid{grid-template-columns:repeat(2,1fr);}.upload-form{grid-template-columns:1fr;}
-      .f-grp.full{grid-column:span 1;}
+      .main{margin-left:60px;padding:1.5rem;}.stats{grid-template-columns:repeat(2,1fr);}
+      .gallery-grid{grid-template-columns:repeat(2,1fr);}.upload-form{grid-template-columns:1fr;}.f-grp.full{grid-column:span 1;}
     }
   </style>
 </head>
-
 <body>
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sb-logo">
       <span class="sb-logo-name">Mujuni BK</span>
       <span class="sb-logo-tag">Admin Panel</span>
     </div>
     <nav class="sb-nav">
-      <a href="#" class="active" onclick="showSection('gallery',this)">
-        <i class="fas fa-images"></i><span>Gallery</span>
-      </a>
-      <a href="#" onclick="showSection('upload',this)">
-        <i class="fas fa-cloud-upload-alt"></i><span>Upload New</span>
-      </a>
-      <a href="#" onclick="showSection('stats',this)">
-        <i class="fas fa-chart-bar"></i><span>Overview</span>
-      </a>
+      <a class="active" onclick="showSection('gallery',this)"><i class="fas fa-images"></i><span>Gallery</span></a>
+      <a onclick="showSection('upload',this)"><i class="fas fa-cloud-upload-alt"></i><span>Upload New</span></a>
     </nav>
     <div class="sb-footer">
-      <a href="../index.html" target="_blank" class="view-site">
-        <i class="fas fa-external-link-alt"></i><span>View Site</span>
-      </a>
-      <button class="sb-logout" onclick="logout()">
-        <i class="fas fa-sign-out-alt"></i><span>Logout</span>
-      </button>
+      <a href="../index.html" target="_blank" class="view-site"><i class="fas fa-external-link-alt"></i><span>View Site</span></a>
+      <button class="sb-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
-    <!-- TOP BAR -->
     <div class="topbar">
       <div>
         <h1 class="page-title" id="pageTitle">Gallery Manager</h1>
@@ -174,334 +147,300 @@
       </div>
     </div>
 
-    <!-- STATS SECTION -->
-    <section id="sec-stats">
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-images"></i></div>
-          <div class="stat-num" id="statTotal">0</div>
-          <div class="stat-label">Total Artworks</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-          <div class="stat-num" id="statUploaded">0</div>
-          <div class="stat-label">Admin Uploaded</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-eye"></i></div>
-          <div class="stat-num" id="statVisible">0</div>
-          <div class="stat-label">Visible in Gallery</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-eye-slash"></i></div>
-          <div class="stat-num" id="statHidden">0</div>
-          <div class="stat-label">Hidden</div>
-        </div>
-      </div>
-    </section>
+    <div class="stats">
+      <div class="stat-card"><div class="stat-icon"><i class="fas fa-images"></i></div><div class="stat-num" id="sTotal">—</div><div class="stat-label">Total</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="fas fa-cloud-upload-alt"></i></div><div class="stat-num" id="sUploaded">—</div><div class="stat-label">Uploaded</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="fas fa-eye"></i></div><div class="stat-num" id="sVisible">—</div><div class="stat-label">Visible</div></div>
+      <div class="stat-card"><div class="stat-icon"><i class="fas fa-eye-slash"></i></div><div class="stat-num" id="sHidden">—</div><div class="stat-label">Hidden</div></div>
+    </div>
 
-    <!-- UPLOAD SECTION -->
+    <!-- UPLOAD -->
     <section id="sec-upload" style="display:none;">
       <div class="panel">
-        <div class="panel-title"><i class="fas fa-cloud-upload-alt"></i> Upload New Paintings</div>
+        <div class="panel-title"><i class="fas fa-cloud-upload-alt"></i> Upload New Painting</div>
         <div class="drop-zone" id="dropZone">
           <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(this.files)">
           <div class="dz-icon"><i class="fas fa-palette"></i></div>
           <p class="dz-text">Drop paintings here or <span>click to browse</span></p>
-          <p class="dz-hint">JPG, PNG, WEBP — multiple files supported</p>
+          <p class="dz-hint">JPG, PNG, WEBP — multiple files OK</p>
         </div>
         <div class="preview-strip" id="previewStrip"></div>
         <div class="upload-form" id="uploadForm" style="display:none;">
-          <div class="f-grp">
-            <label class="f-lbl">Painting Title</label>
-            <input type="text" class="f-in" id="uTitle" placeholder="e.g. Sunset Over Kampala">
+          <div class="f-grp"><label class="f-lbl">Title</label><input class="f-in" id="uTitle" placeholder="e.g. Sunset Over Kampala"></div>
+          <div class="f-grp"><label class="f-lbl">Size</label><select class="f-sel" id="uSize"><option value="A2">A2 — UGX 350,000</option><option value="A3">A3 — UGX 250,000</option></select></div>
+          <div class="f-grp"><label class="f-lbl">Medium</label><input class="f-in" id="uCat" placeholder="e.g. Oil on Canvas"></div>
+          <div class="f-grp"><label class="f-lbl">Status</label><select class="f-sel" id="uVisible"><option value="1">Visible in gallery</option><option value="0">Hidden (draft)</option></select></div>
+          <div class="f-grp full" style="display:flex;gap:1rem;align-items:flex-end;">
+            <button class="btn-gold" onclick="saveUploads()" id="saveBtn"><i class="fas fa-cloud-upload-alt"></i> Upload to Gallery</button>
+            <button class="btn-muted" onclick="clearUpload()"><i class="fas fa-times"></i> Clear</button>
           </div>
-          <div class="f-grp">
-            <label class="f-lbl">Size</label>
-            <select class="f-sel" id="uSize">
-              <option value="A2">A2 — UGX 350,000</option>
-              <option value="A3">A3 — UGX 250,000</option>
-            </select>
-          </div>
-          <div class="f-grp">
-            <label class="f-lbl">Medium / Category</label>
-            <input type="text" class="f-in" id="uCat" placeholder="e.g. Oil on Canvas">
-          </div>
-          <div class="f-grp">
-            <label class="f-lbl">Status</label>
-            <select class="f-sel" id="uVisible">
-              <option value="1">Visible in gallery</option>
-              <option value="0">Hidden (save as draft)</option>
-            </select>
-          </div>
-          <div class="f-grp full" style="display:flex;align-items:flex-end;gap:1rem;">
-            <button class="btn-upload" onclick="saveUploads()">
-              <i class="fas fa-check"></i> Add to Gallery
-            </button>
-            <button class="btn-upload" onclick="clearUpload()" style="background:rgba(255,255,255,.07);color:rgba(244,228,193,.6);box-shadow:none;">
-              <i class="fas fa-times"></i> Clear
-            </button>
+          <div class="f-grp full">
+            <div class="progress-bar-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="progress-label" id="progressLabel"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY SECTION -->
+    <!-- GALLERY -->
     <section id="sec-gallery">
       <div class="panel">
         <div class="panel-title"><i class="fas fa-images"></i> All Artworks</div>
         <div class="tabs">
           <div class="tab active" onclick="filterCards('all',this)">All</div>
-          <div class="tab" onclick="filterCards('admin',this)">Uploaded by Me</div>
-          <div class="tab" onclick="filterCards('default',this)">Default</div>
+          <div class="tab" onclick="filterCards('uploaded',this)">Uploaded by Me</div>
           <div class="tab" onclick="filterCards('hidden',this)">Hidden</div>
         </div>
-        <div class="gallery-grid" id="adminGalleryGrid"></div>
+        <div class="gallery-grid" id="adminGrid"></div>
       </div>
     </section>
   </main>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast">
-    <i class="fas fa-check-circle toast-icon" id="toastIcon"></i>
-    <span class="toast-msg" id="toastMsg"></span>
-  </div>
+  <div class="toast" id="toast"><i class="ti" id="toastIcon"></i><span class="tm" id="toastMsg"></span></div>
 
-  <script>
-    // ── AUTH GUARD ──────────────────────────────────────────────────────────
-    if (sessionStorage.getItem('mbk_admin') !== 'true') {
-      window.location.href = 'login.html';
-    }
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    // ── DEFAULT ARTWORKS (from main site) ───────────────────────────────────
-    const DEFAULTS = [
-      {src:'../images/IMG-20260731-WA0002.jpg',title:'Masterpiece No. 1', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0006.jpg',title:'Masterpiece No. 2', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0009.jpg',title:'Masterpiece No. 3', size:'A3',cat:'Mixed Media'},
-      {src:'../images/IMG-20260731-WA0010.jpg',title:'Masterpiece No. 4', size:'A3',cat:'Acrylic'},
-      {src:'../images/IMG-20260731-WA0016.jpg',title:'Masterpiece No. 5', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0018.jpg',title:'Masterpiece No. 6', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0019.jpg',title:'Masterpiece No. 7', size:'A3',cat:'Acrylic'},
-      {src:'../images/IMG-20260731-WA0020.jpg',title:'Masterpiece No. 8', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0022.jpg',title:'Masterpiece No. 9', size:'A2',cat:'Oil on Canvas'},
-      {src:'../images/IMG-20260731-WA0028.jpg',title:'Masterpiece No. 10',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-44-36.jpeg', title:'Masterpiece No. 11',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-44-36a.jpeg',title:'Masterpiece No. 12',size:'A3',cat:'Acrylic'},
-      {src:'../ALL/img-19-44-39.jpeg', title:'Masterpiece No. 13',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-44-39a.jpeg',title:'Masterpiece No. 14',size:'A3',cat:'Mixed Media'},
-      {src:'../ALL/img-19-44-42.jpeg', title:'Masterpiece No. 15',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-44-59.jpeg', title:'Masterpiece No. 16',size:'A3',cat:'Acrylic'},
-      {src:'../ALL/img-19-45-09.jpeg', title:'Masterpiece No. 17',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-48-00.jpeg', title:'Masterpiece No. 18',size:'A3',cat:'Mixed Media'},
-      {src:'../ALL/img-19-48-02.jpeg', title:'Masterpiece No. 19',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-48-19.jpeg', title:'Masterpiece No. 20',size:'A3',cat:'Acrylic'},
-      {src:'../ALL/img-19-49-30.jpeg', title:'Masterpiece No. 21',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-49-33.jpeg', title:'Masterpiece No. 22',size:'A3',cat:'Mixed Media'},
-      {src:'../ALL/img-19-49-33a.jpeg',title:'Masterpiece No. 23',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-49-34.jpeg', title:'Masterpiece No. 24',size:'A3',cat:'Acrylic'},
-      {src:'../ALL/img-19-49-34a.jpeg',title:'Masterpiece No. 25',size:'A2',cat:'Oil on Canvas'},
-      {src:'../ALL/img-19-49-35.jpeg', title:'Masterpiece No. 26',size:'A3',cat:'Mixed Media'},
-    ];
+  // ── CONFIG ─────────────────────────────────────────────────────────────────
+  const SURL = 'https://mzwjtpqezzkefyghzrzj.supabase.co';
+  const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16d2p0cHFlenprZWZ5Z2h6cnpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwOTY1NjYsImV4cCI6MjEwMTY3MjU2Nn0.rKgFwj9Q_z7kgrMhVKlygBpM0jePq5UxTOWJd9m-7jc';
+  const sb = createClient(SURL, SKEY);
+  const BUCKET = 'artworks';
+  const TABLE  = 'artworks';
 
-    // ── STATE ────────────────────────────────────────────────────────────────
-    const STORE_KEY = 'mbk_admin_artworks';
-    let pendingFiles = [];  // base64 files waiting to be saved
+  // ── AUTH GUARD ─────────────────────────────────────────────────────────────
+  if (sessionStorage.getItem('mbk_admin') !== 'true') {
+    window.location.href = 'login.html';
+  }
 
-    function loadAdminArtworks() {
-      try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
-      catch { return []; }
-    }
+  // ── STATE ──────────────────────────────────────────────────────────────────
+  let pendingFiles = [];
+  let currentFilter = 'all';
+  let allRows = [];
 
-    function saveAdminArtworks(arr) {
-      localStorage.setItem(STORE_KEY, JSON.stringify(arr));
-    }
+  // ── NAV ────────────────────────────────────────────────────────────────────
+  window.showSection = (name, el) => {
+    document.getElementById('sec-upload').style.display  = name === 'upload'  ? '' : 'none';
+    document.getElementById('sec-gallery').style.display = name === 'gallery' ? '' : 'none';
+    document.querySelectorAll('.sb-nav a').forEach(a => a.classList.remove('active'));
+    if (el) el.classList.add('active');
+    const titles = { gallery:'Gallery Manager', upload:'Upload New Painting' };
+    const subs   = { gallery:'Manage paintings shown on your website', upload:'Add new artworks to the public gallery' };
+    document.getElementById('pageTitle').textContent = titles[name];
+    document.getElementById('pageSub').textContent   = subs[name];
+  };
 
-    // ── NAVIGATION ───────────────────────────────────────────────────────────
-    function showSection(name, el) {
-      document.querySelectorAll('.main section[id^="sec-"]').forEach(s => s.style.display = 'none');
-      document.getElementById('sec-' + name).style.display = '';
-      document.getElementById('sec-stats').style.display = '';  // always show stats
-      document.querySelectorAll('.sb-nav a').forEach(a => a.classList.remove('active'));
-      if (el) el.classList.add('active');
-      const titles = {gallery:'Gallery Manager',upload:'Upload New Painting',stats:'Overview'};
-      const subs   = {gallery:'Manage all paintings shown on your website',upload:'Add new artworks to your gallery',stats:'Your gallery at a glance'};
-      document.getElementById('pageTitle').textContent = titles[name] || 'Dashboard';
-      document.getElementById('pageSub').textContent   = subs[name] || '';
-      updateStats();
-    }
+  window.logout = () => { sessionStorage.removeItem('mbk_admin'); window.location.href = 'login.html'; };
 
-    function logout() {
-      sessionStorage.removeItem('mbk_admin');
-      window.location.href = 'login.html';
-    }
+  // ── FILE DROP ──────────────────────────────────────────────────────────────
+  const dz = document.getElementById('dropZone');
+  dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); handleFiles(e.dataTransfer.files); });
 
-    // ── FILE HANDLING ────────────────────────────────────────────────────────
-    function handleFiles(files) {
-      const strip = document.getElementById('previewStrip');
-      const form  = document.getElementById('uploadForm');
-      Array.from(files).forEach(file => {
-        if (!file.type.startsWith('image/')) return;
-        const reader = new FileReader();
-        reader.onload = e => {
-          pendingFiles.push({dataUrl: e.target.result, name: file.name});
-          const item = document.createElement('div');
-          item.className = 'preview-item';
-          item.innerHTML = `<img src="${e.target.result}"><button class="preview-remove" onclick="removePreview(this,${pendingFiles.length-1})"><i class="fas fa-times"></i></button>`;
-          strip.appendChild(item);
-          form.style.display = 'grid';
-        };
-        reader.readAsDataURL(file);
+  window.handleFiles = files => {
+    const strip = document.getElementById('previewStrip');
+    const form  = document.getElementById('uploadForm');
+    Array.from(files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      pendingFiles.push(file);
+      const idx = pendingFiles.length - 1;
+      const url = URL.createObjectURL(file);
+      const item = document.createElement('div');
+      item.className = 'preview-item';
+      item.innerHTML = `<img src="${url}"><button class="preview-remove" onclick="removePreview(this,${idx})"><i class="fas fa-times"></i></button>`;
+      strip.appendChild(item);
+      form.style.display = 'grid';
+    });
+  };
+
+  window.removePreview = (btn, idx) => {
+    pendingFiles[idx] = null;
+    btn.parentElement.remove();
+    if (!pendingFiles.filter(Boolean).length) document.getElementById('uploadForm').style.display = 'none';
+  };
+
+  window.clearUpload = () => {
+    pendingFiles = [];
+    document.getElementById('previewStrip').innerHTML = '';
+    document.getElementById('uploadForm').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    setProgress(0, '');
+  };
+
+  // ── UPLOAD TO SUPABASE ─────────────────────────────────────────────────────
+  window.saveUploads = async () => {
+    const valid = pendingFiles.filter(Boolean);
+    if (!valid.length) { toast('No images selected', 'error'); return; }
+
+    const title   = document.getElementById('uTitle').value.trim() || 'New Artwork';
+    const size    = document.getElementById('uSize').value;
+    const cat     = document.getElementById('uCat').value.trim() || 'Oil on Canvas';
+    const visible = document.getElementById('uVisible').value === '1';
+    const btn     = document.getElementById('saveBtn');
+
+    btn.disabled = true;
+    document.getElementById('progressWrap').classList.add('show');
+    document.getElementById('progressLabel').classList.add('show');
+
+    for (let i = 0; i < valid.length; i++) {
+      const file = valid[i];
+      const pct  = Math.round(((i) / valid.length) * 100);
+      setProgress(pct, `Uploading ${i+1} of ${valid.length}…`);
+
+      // 1. Upload image to Supabase Storage
+      const ext      = file.name.split('.').pop().toLowerCase();
+      const filename = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+      const { data: storageData, error: storageErr } = await sb.storage
+        .from(BUCKET)
+        .upload(filename, file, { contentType: file.type, upsert: false });
+
+      if (storageErr) { toast(`Upload failed: ${storageErr.message}`, 'error'); break; }
+
+      // 2. Get public URL
+      const { data: { publicUrl } } = sb.storage.from(BUCKET).getPublicUrl(filename);
+
+      // 3. Save metadata to artworks table
+      const artTitle = valid.length > 1 ? `${title} ${i + 1}` : title;
+      const { error: dbErr } = await sb.from(TABLE).insert({
+        title: artTitle,
+        size,
+        cat,
+        image_url: publicUrl,
+        visible
       });
+
+      if (dbErr) { toast(`DB error: ${dbErr.message}`, 'error'); break; }
     }
 
-    function removePreview(btn, idx) {
-      pendingFiles[idx] = null;
-      btn.parentElement.remove();
-      if (pendingFiles.filter(Boolean).length === 0) {
-        document.getElementById('uploadForm').style.display = 'none';
-      }
-    }
+    setProgress(100, 'Done!');
+    setTimeout(() => {
+      btn.disabled = false;
+      clearUpload();
+      toast(`${valid.length} painting${valid.length > 1 ? 's' : ''} added to gallery!`, 'success');
+      showSection('gallery', document.querySelector('.sb-nav a'));
+      loadGallery();
+    }, 600);
+  };
 
-    function clearUpload() {
-      pendingFiles = [];
-      document.getElementById('previewStrip').innerHTML = '';
-      document.getElementById('uploadForm').style.display = 'none';
-      document.getElementById('fileInput').value = '';
-    }
+  function setProgress(pct, label) {
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = label;
+  }
 
-    // Drag & drop
-    const dz = document.getElementById('dropZone');
-    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-    dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-    dz.addEventListener('drop', e => {
-      e.preventDefault(); dz.classList.remove('drag-over');
-      handleFiles(e.dataTransfer.files);
+  // ── LOAD GALLERY FROM SUPABASE ─────────────────────────────────────────────
+  async function loadGallery() {
+    const grid = document.getElementById('adminGrid');
+    grid.innerHTML = `<div class="spinner-wrap"><div class="spin"></div></div>`;
+
+    const { data, error } = await sb.from(TABLE)
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) { toast('Failed to load gallery: ' + error.message, 'error'); grid.innerHTML = ''; return; }
+    allRows = data || [];
+    updateStats();
+    renderGrid();
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('adminGrid');
+    const rows = allRows.filter(r => {
+      if (currentFilter === 'uploaded') return true;
+      if (currentFilter === 'hidden')   return !r.visible;
+      return true;
     });
 
-    // ── SAVE UPLOADS ─────────────────────────────────────────────────────────
-    function saveUploads() {
-      const valid = pendingFiles.filter(Boolean);
-      if (!valid.length) { toast('No images selected', 'error'); return; }
-      const title   = document.getElementById('uTitle').value.trim() || 'New Artwork';
-      const size    = document.getElementById('uSize').value;
-      const cat     = document.getElementById('uCat').value.trim() || 'Oil on Canvas';
-      const visible = document.getElementById('uVisible').value === '1';
-      const arr = loadAdminArtworks();
-      valid.forEach((f, i) => {
-        arr.push({
-          id: Date.now() + i,
-          src: f.dataUrl,
-          title: valid.length > 1 ? title + (i > 0 ? ` ${i+1}` : '') : title,
-          size, cat, visible,
-          source: 'admin',
-          addedAt: new Date().toISOString()
-        });
-      });
-      saveAdminArtworks(arr);
-      clearUpload();
-      toast(`${valid.length} painting${valid.length>1?'s':''} added to gallery!`, 'success');
-      showSection('gallery', document.querySelector('.sb-nav a'));
-      renderGallery();
+    if (!rows.length) {
+      grid.innerHTML = `<div class="empty"><i class="fas fa-images"></i><p>No artworks yet. Upload your first painting!</p></div>`;
+      return;
     }
 
-    // ── RENDER GALLERY ────────────────────────────────────────────────────────
-    let currentFilter = 'all';
+    grid.innerHTML = rows.map(r => {
+      const price = r.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000';
+      return `
+        <div class="g-card ${!r.visible ? 'hidden-card' : ''}">
+          <img src="${r.image_url}" alt="${r.title}" loading="lazy">
+          <span class="badge badge-src">Uploaded</span>
+          ${!r.visible ? '<span class="badge badge-hidden"><i class="fas fa-eye-slash"></i> Hidden</span>' : ''}
+          <div class="g-card-info">
+            <div class="g-card-title">${r.title}</div>
+            <div class="g-card-meta"><span>${r.cat} · ${r.size}</span><span class="g-card-price">${price}</span></div>
+          </div>
+          <div class="g-card-actions">
+            <button class="btn-vis" onclick="toggleVisible('${r.id}',${r.visible})">
+              <i class="fas fa-eye${r.visible ? '-slash' : ''}"></i> ${r.visible ? 'Hide' : 'Show'}
+            </button>
+            <button class="btn-del" onclick="deleteArtwork('${r.id}','${r.image_url}')">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>`;
+    }).join('');
+  }
 
-    function renderGallery() {
-      const grid = document.getElementById('adminGalleryGrid');
-      const adminArts = loadAdminArtworks();
-      const all = [
-        ...DEFAULTS.map(d => ({...d, source:'default', visible:true, id:'d_'+d.src})),
-        ...adminArts
-      ];
+  window.filterCards = (type, el) => {
+    currentFilter = type;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    renderGrid();
+  };
 
-      const filtered = all.filter(a => {
-        if (currentFilter === 'all')     return true;
-        if (currentFilter === 'admin')   return a.source === 'admin';
-        if (currentFilter === 'default') return a.source === 'default';
-        if (currentFilter === 'hidden')  return a.visible === false;
-        return true;
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div class="empty" style="grid-column:span 4;"><i class="fas fa-images"></i><p>No artworks here yet.</p></div>`;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(a => {
-        const price = a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000';
-        const isAdmin = a.source === 'admin';
-        return `
-          <div class="g-card ${!a.visible ? 'hidden-card' : ''}" id="card_${a.id}">
-            <img src="${a.src}" alt="${a.title}" loading="lazy">
-            <span class="source-badge ${isAdmin?'admin':'default'}">${isAdmin?'Uploaded':'Default'}</span>
-            ${!a.visible ? '<span class="hidden-badge"><i class="fas fa-eye-slash"></i> Hidden</span>' : ''}
-            <div class="g-card-info">
-              <div class="g-card-title">${a.title}</div>
-              <div class="g-card-meta"><span>${a.cat||'Oil on Canvas'} · ${a.size}</span><span class="g-card-price">${price}</span></div>
-            </div>
-            <div class="g-card-actions">
-              <button class="btn-vis" onclick="toggleVisible('${a.id}','${a.source}')">
-                <i class="fas fa-eye${!a.visible?'':'-slash'}"></i> ${a.visible?'Hide':'Show'}
-              </button>
-              ${isAdmin ? `<button class="btn-del" onclick="deleteArtwork('${a.id}')"><i class="fas fa-trash"></i> Delete</button>` : ''}
-            </div>
-          </div>`;
-      }).join('');
-
-      updateStats();
-    }
-
-    function filterCards(type, el) {
-      currentFilter = type;
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-      renderGallery();
-    }
-
-    function toggleVisible(id, source) {
-      if (source === 'default') { toast('Default images are always visible', 'error'); return; }
-      const arr = loadAdminArtworks();
-      const item = arr.find(a => String(a.id) === String(id));
-      if (item) { item.visible = !item.visible; saveAdminArtworks(arr); renderGallery(); toast(`Painting ${item.visible?'shown in':'hidden from'} gallery`, 'success'); }
-    }
-
-    function deleteArtwork(id) {
-      if (!confirm('Delete this painting from the gallery? This cannot be undone.')) return;
-      const arr = loadAdminArtworks().filter(a => String(a.id) !== String(id));
-      saveAdminArtworks(arr);
-      renderGallery();
-      toast('Painting removed from gallery', 'success');
-    }
-
-    // ── STATS ────────────────────────────────────────────────────────────────
-    function updateStats() {
-      const adminArts = loadAdminArtworks();
-      const total   = DEFAULTS.length + adminArts.length;
-      const uploaded = adminArts.length;
-      const hidden  = adminArts.filter(a => !a.visible).length;
-      const visible = total - hidden;
-      document.getElementById('statTotal').textContent    = total;
-      document.getElementById('statUploaded').textContent = uploaded;
-      document.getElementById('statVisible').textContent  = visible;
-      document.getElementById('statHidden').textContent   = hidden;
-    }
-
-    // ── TOAST ────────────────────────────────────────────────────────────────
-    function toast(msg, type = 'success') {
-      const el   = document.getElementById('toast');
-      const icon = document.getElementById('toastIcon');
-      const txt  = document.getElementById('toastMsg');
-      el.className = `toast ${type}`;
-      icon.className = `fas fa-${type==='success'?'check-circle':'exclamation-circle'} toast-icon`;
-      txt.textContent = msg;
-      el.classList.add('show');
-      setTimeout(() => el.classList.remove('show'), 3200);
-    }
-
-    // ── INIT ─────────────────────────────────────────────────────────────────
-    renderGallery();
+  // ── TOGGLE VISIBILITY ──────────────────────────────────────────────────────
+  window.toggleVisible = async (id, current) => {
+    const { error } = await sb.from(TABLE).update({ visible: !current }).eq('id', id);
+    if (error) { toast('Update failed: ' + error.message, 'error'); return; }
+    const row = allRows.find(r => r.id === id);
+    if (row) row.visible = !current;
+    renderGrid();
     updateStats();
-  </script>
+    toast(`Painting ${!current ? 'shown in' : 'hidden from'} public gallery`, 'success');
+  };
+
+  // ── DELETE ─────────────────────────────────────────────────────────────────
+  window.deleteArtwork = async (id, imageUrl) => {
+    if (!confirm('Delete this painting permanently? This cannot be undone.')) return;
+
+    // Extract storage path from public URL
+    const path = imageUrl.split(`/storage/v1/object/public/${BUCKET}/`)[1];
+
+    // Remove from storage
+    if (path) await sb.storage.from(BUCKET).remove([path]);
+
+    // Remove from DB
+    const { error } = await sb.from(TABLE).delete().eq('id', id);
+    if (error) { toast('Delete failed: ' + error.message, 'error'); return; }
+
+    allRows = allRows.filter(r => r.id !== id);
+    renderGrid();
+    updateStats();
+    toast('Painting deleted from gallery', 'success');
+  };
+
+  // ── STATS ──────────────────────────────────────────────────────────────────
+  function updateStats() {
+    const total   = allRows.length;
+    const visible = allRows.filter(r => r.visible).length;
+    const hidden  = total - visible;
+    document.getElementById('sTotal').textContent    = total;
+    document.getElementById('sUploaded').textContent = total;
+    document.getElementById('sVisible').textContent  = visible;
+    document.getElementById('sHidden').textContent   = hidden;
+  }
+
+  // ── TOAST ──────────────────────────────────────────────────────────────────
+  window.toast = (msg, type = 'success') => {
+    const el = document.getElementById('toast');
+    const icons = { success:'fas fa-check-circle', error:'fas fa-exclamation-circle', info:'fas fa-info-circle' };
+    el.className = `toast ${type}`;
+    document.getElementById('toastIcon').className = `ti ${icons[type] || icons.success}`;
+    document.getElementById('toastMsg').textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3500);
+  };
+
+  // ── INIT ───────────────────────────────────────────────────────────────────
+  loadGallery();
+</script>
 </body>
 </html>

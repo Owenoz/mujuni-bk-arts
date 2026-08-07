@@ -905,7 +905,12 @@
     <div class="lb-info"><div class="lb-title" id="lbTitle"></div><div class="lb-price" id="lbPrice"></div><button class="btn-gold" style="margin-top:1rem;" id="lbOrder"><i class="fas fa-shopping-bag"></i> Order This Piece</button></div>
   </div>
 
-  <script>
+  <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  const _sb = createClient(
+    'https://mzwjtpqezzkefyghzrzj.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16d2p0cHFlenprZWZ5Z2h6cnpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYwOTY1NjYsImV4cCI6MjEwMTY3MjU2Nn0.rKgFwj9Q_z7kgrMhVKlygBpM0jePq5UxTOWJd9m-7jc'
+  );
   // ── GALLERY DATA ──
   const ART = [
     {src:'./images/IMG-20260731-WA0002.jpg',   title:'Masterpiece No. 1', size:'A2',price:'UGX 350,000'},
@@ -1224,33 +1229,41 @@
   window.addEventListener('DOMContentLoaded', () => {
     // (appended after main DOMContentLoaded — safe to call gsap directly)
   });
-  // ── LOAD ADMIN-UPLOADED ARTWORKS INTO GALLERY ──────────────────────────────
-  (function injectAdminArtworks() {
+  // ── LOAD ADMIN-UPLOADED ARTWORKS FROM SUPABASE ────────────────────────────
+  async function injectSupabaseArtworks() {
     try {
-      const stored = JSON.parse(localStorage.getItem('mbk_admin_artworks') || '[]');
-      const visible = stored.filter(a => a.visible !== false);
-      if (!visible.length) return;
+      const { data, error } = await _sb
+        .from('artworks')
+        .select('*')
+        .eq('visible', true)
+        .order('created_at', { ascending: false });
+
+      if (error || !data || !data.length) return;
 
       const grid = document.getElementById('gGrid');
       if (!grid) return;
 
-      visible.forEach((a, i) => {
-        const idx = ART.length; // append after existing
-        ART.push({ src: a.src, title: a.title, size: a.size, price: a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000' });
-
-        const card = document.createElement('div');
-        card.className = 'art-card';
-        card.dataset.size = a.size ? a.size.toLowerCase() : 'a2';
-        card.dataset.idx = idx;
-        card.setAttribute('onclick', `openLB(${idx})`);
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px) scale(.96)';
+      data.forEach((a, i) => {
+        const idx = ART.length;
+        ART.push({
+          src:   a.image_url,
+          title: a.title,
+          size:  a.size,
+          price: a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000'
+        });
 
         const price = a.size === 'A2' ? 'UGX 350,000' : 'UGX 250,000';
+        const card = document.createElement('div');
+        card.className = 'art-card';
+        card.dataset.size = (a.size || 'A2').toLowerCase();
+        card.dataset.idx  = idx;
+        card.setAttribute('onclick', `openLB(${idx})`);
+        card.style.opacity   = '0';
+        card.style.transform = 'translateY(50px) scale(.96)';
         card.innerHTML = `
           <div class="card-img-wrap">
             <span class="badge-new">New</span>
-            <img src="${a.src}" alt="${a.title}" loading="lazy">
+            <img src="${a.image_url}" alt="${a.title}" loading="lazy">
             <div class="card-overlay">
               <div class="card-cat">${a.cat || 'Oil on Canvas'} · ${a.size}</div>
               <h3 class="card-ttl">${a.title}</h3>
@@ -1259,7 +1272,7 @@
                   <div class="card-price">${price}</div>
                   <div class="card-sz">${a.size} · Framed</div>
                 </div>
-                <button class="c-buy" onclick="event.stopPropagation();order('${a.title}')">
+                <button class="c-buy" onclick="event.stopPropagation();order('${a.title.replace(/'/g,"\\'")}')">
                   <i class="fas fa-shopping-bag"></i>
                 </button>
               </div>
@@ -1267,17 +1280,27 @@
           </div>`;
         grid.appendChild(card);
 
-        // Animate in
         setTimeout(() => {
           card.style.transition = 'opacity .6s ease, transform .6s ease';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0) scale(1)';
-        }, 100 + i * 80);
+          card.style.opacity    = '1';
+          card.style.transform  = 'translateY(0) scale(1)';
+        }, 80 + i * 80);
       });
-    } catch(e) { console.warn('Admin artworks load error:', e); }
-  })();
+    } catch(e) { console.warn('Supabase gallery load error:', e); }
+  }
+  injectSupabaseArtworks();
 
   // ── SMOOTH SCROLL ──
+  // Expose functions needed by inline onclick handlers (required for type="module")
+  window.openLB        = openLB;
+  window.closeLB       = closeLB;
+  window.closeLBBg     = closeLBBg;
+  window.lbNav         = lbNav;
+  window.order         = order;
+  window.submitForm    = submitForm;
+  window.openMob       = openMob;
+  window.closeMob      = closeMob;
+  window.filterG       = filterG;
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
       const t=document.querySelector(a.getAttribute('href'));
